@@ -1,0 +1,740 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Operadores y Estructuras de control (Ciclos).</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d3e8c1ba-551f-4707-83a5-301fddfbbd7a" class="page sans"><header><h1 class="page-title">Operadores y Estructuras de control (Ciclos).</h1><p class="page-description"></p></header><div class="page-body"><h2 id="e960a412-8bf2-4b88-ad66-26e012f6a405" class="">Operadores</h2><p id="c5d90354-71bf-44ae-9dd6-19d026352292" class="">Son símbolos o palabras clave que realizan operaciones en variables y valores. Pueden realizar tareas como la adición, la resta, la multiplicación, la comparación, la asignación, entre otras.</p><h3 id="25974207-de60-4fd8-b964-3ab680178e05" class="">Operadores Comparación:</h3><ul id="39c0a031-e3eb-4eac-9a4a-acf5715957f0" class="bulleted-list"><li style="list-style-type:disc"><code><strong>++</strong></code> : Incremento</li></ul><ul id="ce742f91-8441-49f7-89fd-beadc18a9c3e" class="bulleted-list"><li style="list-style-type:disc"><code><strong>-</strong></code> : Decremento</li></ul><div id="0eab9e75-4cc8-45ae-a9da-4b18ae4b6eb9" class="column-list"><div id="e18f8e7d-4f81-4492-947e-1d43ee05c643" style="width:100%" class="column"><h3 id="d69661b7-1773-4bbc-8aac-09e128bd258a" class="">Operadores Aritméticos:</h3><ul id="15c653b9-e352-46c9-b173-7353fc81b951" class="bulleted-list"><li style="list-style-type:disc"><code><strong>+</strong></code> : Suma</li></ul><ul id="0c6fade4-127c-4636-b52c-b7bd6182021a" class="bulleted-list"><li style="list-style-type:disc"><code><strong></strong></code> : Resta</li></ul><ul id="44f23e45-e0ec-4669-8ecd-3d6ac7a16a08" class="bulleted-list"><li style="list-style-type:disc"><code><strong></strong></code> : Multiplicación</li></ul><ul id="63ea35a9-14e9-41f4-865a-f4f79d9d1578" class="bulleted-list"><li style="list-style-type:disc"><code><strong>/</strong></code> : División</li></ul><ul id="ac57131b-e4f7-4470-868e-482281b119f9" class="bulleted-list"><li style="list-style-type:disc"><code><strong>%</strong></code> : Módulo (resto de la división)</li></ul></div><div id="5cc033ee-6ea1-45b5-90e1-fbef25cef4da" style="width:100%" class="column"><h3 id="fdd28d71-4409-457e-87fd-58f3da67b49b" class="">Operadores Asignación:</h3><ul id="1d17f922-4b31-4cf9-a4ef-258ee4512501" class="bulleted-list"><li style="list-style-type:disc"><code><strong>=</strong></code> : Asignación</li></ul><ul id="fb498cd0-a357-4fba-9471-46799ad14350" class="bulleted-list"><li style="list-style-type:disc"><code><strong>+=</strong></code> : Suma y asignación</li></ul><ul id="c930dd8b-5ecb-4709-9780-5a9821a9b6dd" class="bulleted-list"><li style="list-style-type:disc"><code><strong>=</strong></code> : Resta y asignación</li></ul><ul id="f9b09ee7-afaf-4ef8-9fda-bcabb17d7c63" class="bulleted-list"><li style="list-style-type:disc"><code><strong>=</strong></code> : Multiplicación y asignación</li></ul><ul id="202ad4ba-1e20-4fdb-bd9a-24c4a8a36212" class="bulleted-list"><li style="list-style-type:disc"><code><strong>/=</strong></code> : División y asignación</li></ul></div></div><div id="5f53e61d-779a-412f-8fa5-32b25c7cec76" class="column-list"><div id="7424cafd-3662-4dd9-80b5-a7187d4eabe2" style="width:50%" class="column"><h3 id="3da73865-a0e5-49b7-86cd-f8985de412f6" class="">Operadores Comparación:</h3><ul id="fd01fa64-ca6c-4b7a-9abe-4a96ee1cca54" class="bulleted-list"><li style="list-style-type:disc"><code><strong>==</strong></code> : Igual a</li></ul><ul id="2fb36bcb-4da4-4400-bf69-59914f51c1b4" class="bulleted-list"><li style="list-style-type:disc"><code><strong>!=</strong></code> o <code><strong>&lt;&gt;</strong></code> : No igual a</li></ul><ul id="9c4bb7dd-7d91-453d-aa10-f42bacd7fabb" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&lt;</strong></code> : Menor que</li></ul><ul id="b593a01a-1ccd-4139-86bd-a2ad5a0bbcc1" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&gt;</strong></code> : Mayor que</li></ul><ul id="53295469-36c8-407d-a9f5-71792832b518" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&lt;=</strong></code> : Menor o igual que</li></ul><ul id="2671b48a-9d00-42f3-8435-537f8b289e25" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&gt;=</strong></code> : Mayor o igual que</li></ul></div><div id="3a820888-37ac-4ade-8ef5-44253055b2a2" style="width:50%" class="column"><h3 id="bcba7f45-2e2d-4800-9dac-e881d174611c" class="">Operadores Comparación:</h3><ul id="60a926ed-dbbc-4b40-9920-df0a568124be" class="bulleted-list"><li style="list-style-type:disc"><code><strong>&amp;&amp;</strong></code> o <code><strong>and</strong></code> : AND lógico</li></ul><ul id="9da001bf-8950-4ca2-a601-f51b48c27ffd" class="bulleted-list"><li style="list-style-type:disc"><code><strong>||</strong></code> o <code><strong>or</strong></code> : OR lógico</li></ul><ul id="892984cd-ec16-47b9-be57-da1048e34cc3" class="bulleted-list"><li style="list-style-type:disc"><code><strong>!</strong></code> o <code><strong>not</strong></code> : NOT lógico</li></ul><p id="29f8aca8-272e-49c1-b9aa-edb143902067" class="">
+</p></div></div><h3 id="4d506427-b42f-4fef-beaa-15f5f4136167" class="">Operadores de asignación: </h3><p id="aeb82aab-d08d-401c-939d-77fc3462c45a" class="">En PHP tambien se utiliza para sumar, restar, multiplicar o dividir el valor de la derecha al valor de la izquierda y luego asignar el resultado a la variable de la izquierda. Es una forma abreviada de escribir <code><strong>$variable = $variable + valor</strong></code>.</p><pre id="9f0bc225-ee2e-4dee-a360-1b5bbbd26bf7" class="code"><code>// Ejemplo practico.
+&lt;?php
+	$numero = 5;
+	$numero += 3; // Equivalente a $numero = $numero + 3;
+	
+	echo $numero; // Imprimirá en pantalla el resultado = 8
+?&gt;</code></pre><h2 id="10fe1ef7-5458-47a9-8a2a-90bee2f5764e" class="">Definicion de que es un ciclo.</h2><p id="a2c085e3-0a53-4c0b-8d03-4ecd750bbdde" class="">En general, un bucle es una estructura de control que permite repetir un bloque de instrucciones las veces que sea necesario. El bloque de instrucciones que se repite se suele llamar cuerpo del bucle y cada repetición se suele llamar iteración. PHP dispone de varias instrucciones para definir bucles.</p><h3 id="ffd49d76-02fe-4587-9f19-497bcbe71f03" class="">Ciclo for</h3><p id="01196bcd-c2d7-4b11-9c14-7d897501ece8" class="">Es una estructura de control que permite ejecutar un bloque de código varias veces, de acuerdo con una condición específica.</p><pre id="a9258bca-054f-4553-9943-e714bd9bed36" class="code"><code>// La sintaxis básica de un bucle &quot;for&quot; en PHP es la siguiente:
+for (inicialización; condición; incremento/decremento) {
+    // código a ejecutar en cada iteración
+}</code></pre><pre id="e5cfaa65-d126-424b-996c-5cc3dd7e76ce" class="code"><code>// Ejemplo practico con ciclo for
+for ($i = 1; $i &lt;= 5; $i++) {
+    echo $i . &quot; &quot;;
+}</code></pre><pre id="dbbb55ac-8ac7-44b3-9d52-aae1ebd4f9ca" class="code"><code>// Ejemplo practico
+// Suma de los primeros 10 digitos usando ciclo for y operadores de asignación.
+&lt;?php
+// Declaramos la variable y la inicializamos en 0
+	$suma = 0;
+	
+	// Definimos una estructura de control que se va a repetir 10 veces
+	// iniciando del &quot;1&quot;. e incrementandose de &quot;1 en 1&quot;.
+	for ($i = 1; $i &lt;= 10; $i++) {
+			// Realizamos la suma
+	    $suma += $i;
+	}
+	// Imprimimos en pantalla el resultado.
+	echo &quot;La suma de los primeros 10 números es: &quot; . $suma;
+	?&gt;</code></pre><p id="2180ec60-23fb-4271-9c3d-4cbb80f9547c" class="">
+</p><h3 id="2762fe42-ec02-4b08-88dd-fb371ef807a3" class="">Ciclo While</h3><p id="32be37b0-bcc3-4fa8-9209-545ce71bc002" class="">El ciclo while se utiliza para repetir un bloque de código mientras una condición especificada sea verdadera.</p><pre id="912e8b4b-3058-4c0c-bfd0-0280f8d278cf" class="code"><code>// La sintaxis básica del ciclo while es la siguiente:
+while (condición) {
+    // código a ejecutar mientras la condición sea verdadera
+}</code></pre><pre id="1668dee0-28ab-4b3b-b59c-ab6891366ec5" class="code"><code>// EJEMPLO PRACTICO USANDO EL CICLO WHILE:
+// Desplegar 5 numeros en pantalla.
+
+// Declaramos la variable y la inicializamos en 1.
+$contador = 1;
+
+// Definimos la estructura de control en donde la condicion es:
+// Si la variable es menor o igual que 5, despliegame en pantalla.
+while ($contador &lt;= 5) {
+		// Hacemos una impresion en pantalla
+    echo &quot;Iteración $contador &lt;br&gt;&quot;;
+		// Incrementamos de &quot;1 en 1&quot;
+    $contador++;
+}</code></pre><pre id="13132d04-8130-43ed-8cc4-c37b7d1b54ae" class="code"><code>// OUPUT
+Iteración 1
+Iteración 2
+Iteración 3
+Iteración 4
+Iteración 5</code></pre><p id="d8bf053a-b8ea-4665-8a73-2c248dc8504d" class="">
+</p><h3 id="1b50189c-d22e-4e85-9358-46d8decf750a" class="">Ciclo Do While</h3><p id="70dc0898-c25a-4750-81ef-acffd0bc6ea2" class="">Bucle que ejecuta un bloque de código mientras una condición especificada sea verdadera. La diferencia principal entre do-while y while es que do-while asegura que el bloque de código se ejecute al menos una vez, ya que la condición se evalúa después de la ejecución del bloque.</p><pre id="08872511-82b7-4383-9ede-285a72c45445" class="code"><code>// La sintaxis básica de un bucle do-while en PHP es la siguiente:
+do {
+    // código a ejecutar
+} while (condición);</code></pre><pre id="b4dfffae-34f7-430f-b434-7883de5364b0" class="code"><code>// EJEMPLO PRACTICO USANDO EL CICLO DO WHILE:
+// Desplegar 5 numeros en pantalla.
+&lt;?php
+	$numero = 1;
+	
+	do {
+	    echo $numero . &quot; &quot;;
+	    $numero++;
+	} while ($numero &lt;= 5);
+?&gt;</code></pre><pre id="6bbb7bc5-1311-4a4c-a041-ed2f352d1e6f" class="code"><code>// OUTPUT
+1 2 3 4 5</code></pre><p id="f0c7cba0-0a45-42b7-bb3a-a0e76e9b7946" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
